@@ -7,6 +7,8 @@ import java.util.Scanner;
  */
 public class App {
   private Scanner input;
+  private Login login;
+  private Balance balance;
 
   private App(Scanner scannerInput) {
     this.input = scannerInput;
@@ -27,7 +29,7 @@ public class App {
         System.out.print("Enter your password: ");
         String password = input.nextLine();
 
-        Login login = new Login(name, password);
+        this.login = new Login(name, password);
 
         if (login.checkCredentials(name, password)) {
             isLoggedIn = true;
@@ -46,12 +48,36 @@ public class App {
     if (isLoggedIn) {
         System.out.println("Login successful!");
     }
+
+    System.out.println();
   }
 
-
-
   private void checkBalance() {
-    System.out.println("!!!");
+    System.out.println("Private account of " + login.getUsername() + ":");
+    this.balance = new Balance(login);
+    System.out.println(balance.getUserbalance() + " DKK");
+    System.out.println();
+  }
+
+  private void menu() {
+    int val = 0;
+
+    while (val != 8) {
+      System.out.println("1- Check your balance");
+      System.out.println("2- Transfer money");
+      System.out.println("3- Pay your bill");
+      System.out.println("4- Loan services");
+      System.out.println("5- Card services");
+      System.out.println("6- Investments");
+      System.out.println("7- Customer service");
+      System.out.println("8- Log out");
+      val = input.nextInt();
+
+      if (val == 1) {
+        checkBalance();
+      } 
+
+    }
   }
 
   /**
@@ -61,7 +87,7 @@ public class App {
     Scanner consoleInput = new Scanner(System.in, "UTF-8");
     App theApp = new App(consoleInput);
     theApp.start();
-    theApp.checkBalance();
+    theApp.menu();
     // close the scanner
     consoleInput.close();
   }

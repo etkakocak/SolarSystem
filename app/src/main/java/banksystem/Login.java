@@ -3,7 +3,6 @@ package banksystem;
 public class Login {
     private String username;
 
-    // kullanıcı adları ve şifreleri depolamak için bir dizi tanımlayalım
     private static final String[][] users = {
         {"Deneme1", "deneme123"},
         {"Deneme2", "merhaba123"}
